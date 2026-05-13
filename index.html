@@ -3,26 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arual Experiences| Cotizador</title>
-    
+    <title>Arual Experiences | Cotizador</title>
+
     <!-- Fuente moderna desde Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         /* --- VARIABLES DE DISEÑO Y RESETEO --- */
         :root {
-            --primary-color: #007bff; 
+            --primary-color: #0b7cff;
             --primary-hover: #0056b3;
-            --accent-color: #ffc107; 
-            --bg-color: #f4f7f9;
-            --card-bg: #ffffff;
-            --text-main: #2d3436;
-            --text-secondary: #636e72;
-            --shadow: 0 10px 30px rgba(0,0,0,0.08);
-            --transition: all 0.3s ease;
-            --radius: 12px;
+            --secondary-color: #00c6ff;
+            --accent-color: #ffc107;
+            --whatsapp: #25D366;
+            --whatsapp-hover: #1ebe57;
+            --bg-color: #eef6ff;
+            --card-bg: rgba(255,255,255,0.96);
+            --text-main: #17202a;
+            --text-secondary: #5f6f7a;
+            --border-color: #dce8f3;
+            --input-bg: #f5f9fd;
+            --shadow: 0 18px 45px rgba(15, 66, 125, 0.16);
+            --shadow-soft: 0 10px 25px rgba(15, 66, 125, 0.10);
+            --transition: all 0.25s ease;
+            --radius: 24px;
+            --radius-small: 16px;
         }
 
         * {
@@ -31,30 +38,79 @@
             padding: 0;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-color);
+            background:
+                radial-gradient(circle at top left, rgba(0, 198, 255, 0.24), transparent 32%),
+                radial-gradient(circle at bottom right, rgba(255, 193, 7, 0.20), transparent 30%),
+                linear-gradient(180deg, #f7fbff 0%, var(--bg-color) 100%);
             color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(11,124,255,0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(11,124,255,0.035) 1px, transparent 1px);
+            background-size: 34px 34px;
+            mask-image: linear-gradient(to bottom, black, transparent 80%);
         }
 
         /* --- ENCABEZADO Y LOGO CON MOVIMIENTO --- */
         header {
-            background: linear-gradient(135deg, var(--primary-color) 0%, #00c6ff 100%);
+            position: relative;
+            overflow: hidden;
+            background:
+                linear-gradient(135deg, rgba(0, 47, 108, 0.94), rgba(0, 124, 255, 0.88)),
+                url('img/header.jpg') center/cover no-repeat;
             color: white;
-            padding: 60px 20px;
+            padding: 46px 18px 92px;
             text-align: center;
-            border-bottom-left-radius: 50% 10%;
-            border-bottom-right-radius: 50% 10%;
             box-shadow: var(--shadow);
+            border-bottom-left-radius: 38px;
+            border-bottom-right-radius: 38px;
+        }
+
+        header::before,
+        header::after {
+            content: '';
+            position: absolute;
+            border-radius: 999px;
+            opacity: 0.22;
+            background: white;
+        }
+
+        header::before {
+            width: 180px;
+            height: 180px;
+            top: -76px;
+            right: -58px;
+        }
+
+        header::after {
+            width: 110px;
+            height: 110px;
+            bottom: 28px;
+            left: -42px;
         }
 
         .logo-container {
+            position: relative;
+            z-index: 2;
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 0;
         }
 
         .logo-placeholder {
@@ -72,115 +128,180 @@
         }
 
         @keyframes pulseLogo {
-            0% { transform: scale(1); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-            50% { transform: scale(1.05); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-            100% { transform: scale(1); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+            0% { transform: scale(1); box-shadow: 0 10px 28px rgba(0,0,0,0.22); }
+            50% { transform: scale(1.04); box-shadow: 0 16px 34px rgba(0,0,0,0.16); }
+            100% { transform: scale(1); box-shadow: 0 10px 28px rgba(0,0,0,0.22); }
         }
 
         .my-real-logo {
-            width: 100px;
-            height: auto;
-            animation: pulseLogo 2s infinite ease-in-out;
+            width: 112px;
+            height: 112px;
+            object-fit: contain;
+            background: rgba(255,255,255,0.94);
+            border: 5px solid rgba(255,255,255,0.45);
+            border-radius: 28px;
+            padding: 10px;
+            margin-bottom: 18px;
+            box-shadow: 0 16px 34px rgba(0,0,0,0.22);
+            animation: pulseLogo 2.6s infinite ease-in-out;
         }
 
         header h1 {
-            font-weight: 700;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: clamp(2.05rem, 8vw, 3.3rem);
+            line-height: 0.98;
+            letter-spacing: -1.5px;
+            margin-bottom: 12px;
+            text-shadow: 0 4px 14px rgba(0,0,0,0.22);
         }
 
         header p {
-            font-weight: 300;
-            font-size: 1.1rem;
-            opacity: 0.9;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            max-width: 360px;
+            font-weight: 500;
+            font-size: 1rem;
+            opacity: 0.98;
+            padding: 10px 16px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.20);
+        }
+
+        header p::before {
+            content: '✈️';
         }
 
         /* --- CONTENIDO PRINCIPAL Y FORMULARIO --- */
         main {
-            max-width: 800px;
-            margin: -40px auto 60px;
-            padding: 0 20px;
+            width: min(100%, 860px);
+            margin: -58px auto 56px;
+            padding: 0 16px;
             position: relative;
             z-index: 10;
         }
 
         .cotizador-card {
             background-color: var(--card-bg);
-            padding: 40px;
+            padding: 30px;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
-            border: 1px solid rgba(0,0,0,0.03);
+            border: 1px solid rgba(255,255,255,0.78);
+            backdrop-filter: blur(12px);
         }
 
         .section-title {
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 25px;
-            font-size: 1.5rem;
-            border-left: 5px solid var(--accent-color);
-            padding-left: 15px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            color: var(--text-main);
+            margin-bottom: 22px;
+            font-size: clamp(1.25rem, 5vw, 1.65rem);
+            letter-spacing: -0.5px;
+            border-left: 0;
+            padding-left: 0;
+        }
+
+        .section-title::before {
+            content: '';
+            flex: 0 0 12px;
+            width: 12px;
+            height: 34px;
+            border-radius: 999px;
+            background: linear-gradient(180deg, var(--accent-color), var(--primary-color));
+            box-shadow: 0 8px 18px rgba(11,124,255,0.22);
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--text-main);
-            font-size: 0.95rem;
+            font-size: 0.94rem;
+            letter-spacing: -0.1px;
         }
 
-        select, input[type="date"], input[type="number"] {
+        select,
+        input[type="date"],
+        input[type="number"] {
             width: 100%;
-            padding: 15px;
-            border: 2px solid transparent;
-            border-radius: 8px;
-            background-color: #f0f3f5;
+            min-height: 56px;
+            padding: 15px 16px;
+            border: 1.5px solid var(--border-color);
+            border-radius: var(--radius-small);
+            background-color: var(--input-bg);
             font-family: 'Poppins', sans-serif;
             font-size: 1rem;
+            font-weight: 500;
             color: var(--text-main);
             transition: var(--transition);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
+            -webkit-appearance: none;
+            appearance: none;
         }
 
-        select:focus, input:focus {
+        select {
+            background-image:
+                linear-gradient(45deg, transparent 50%, var(--primary-color) 50%),
+                linear-gradient(135deg, var(--primary-color) 50%, transparent 50%);
+            background-position:
+                calc(100% - 22px) 50%,
+                calc(100% - 16px) 50%;
+            background-size: 6px 6px, 6px 6px;
+            background-repeat: no-repeat;
+            padding-right: 46px;
+        }
+
+        select:focus,
+        input:focus {
             outline: none;
             border-color: var(--primary-color);
-            background-color: white;
-            box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1);
+            background-color: #ffffff;
+            box-shadow: 0 0 0 5px rgba(11, 124, 255, 0.12);
+            transform: translateY(-1px);
         }
-        
+
         /* Estilo para campos calculados automáticamente */
         input[readonly] {
-            background-color: #e9ecef;
+            background-color: #edf2f7;
             color: #6c757d;
             cursor: not-allowed;
-            border-color: transparent;
+            border-color: #e0e8f0;
         }
-        
+
         input[readonly]:focus {
             box-shadow: none;
-            border-color: transparent;
+            border-color: #e0e8f0;
+            transform: none;
         }
 
         .help-text {
-            font-size: 0.85rem;
+            font-size: 0.84rem;
             color: var(--text-secondary);
-            margin-top: 5px;
+            margin-top: 7px;
             display: block;
+            line-height: 1.35;
         }
 
         .warning-text {
             color: #d63031;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .success-text {
-            color: #00b894;
-            font-weight: 600;
+            color: #00a36c;
+            font-weight: 700;
         }
 
         .hidden {
@@ -189,88 +310,219 @@
 
         .row {
             display: flex;
-            gap: 20px;
+            gap: 18px;
         }
 
         .col {
             flex: 1;
+            min-width: 0;
         }
 
         /* --- DISEÑO DE HABITACIONES DINÁMICAS --- */
         #habitaciones_container {
-            margin-top: 30px;
+            margin-top: 24px;
         }
 
         .habitacion-card {
-            background-color: #fbfcfd;
-            border: 1px solid #e9ecef;
-            padding: 25px;
-            border-radius: var(--radius);
-            margin-bottom: 20px;
+            background:
+                linear-gradient(180deg, rgba(255,255,255,0.98), rgba(247,251,255,0.98));
+            border: 1px solid var(--border-color);
+            padding: 22px;
+            border-radius: 22px;
+            margin-bottom: 18px;
             position: relative;
+            overflow: hidden;
             transition: var(--transition);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .habitacion-card::after {
+            content: '';
+            position: absolute;
+            width: 96px;
+            height: 96px;
+            right: -36px;
+            top: -36px;
+            border-radius: 999px;
+            background: rgba(11,124,255,0.08);
         }
 
         .habitacion-card:hover {
-            border-color: rgba(0, 123, 255, 0.2);
+            border-color: rgba(11, 124, 255, 0.28);
             background-color: #f8fbff;
+            transform: translateY(-2px);
         }
 
         .habitacion-title {
-            font-weight: 600;
+            position: relative;
+            z-index: 1;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
             color: var(--text-main);
-            margin-bottom: 15px;
-            font-size: 1.1rem;
+            margin-bottom: 16px;
+            font-size: 1.08rem;
             display: flex;
             align-items: center;
         }
-        
+
         .habitacion-title::before {
             content: '🏨';
             margin-right: 10px;
-            font-size: 1.2rem;
+            font-size: 1.25rem;
         }
 
         .edades-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #eee;
+            grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
+            gap: 14px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px dashed #d7e4ef;
         }
 
         /* --- BOTÓN DE WHATSAPP --- */
         .btn-whatsapp {
-            background-color: #25D366; 
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--whatsapp), #16b956);
             color: white;
             border: none;
-            padding: 18px 30px;
+            padding: 19px 24px;
+            min-height: 62px;
             width: 100%;
-            border-radius: 8px;
-            font-size: 1.2rem;
-            font-weight: 700;
+            border-radius: 18px;
+            font-size: 1.08rem;
+            font-weight: 800;
+            letter-spacing: -0.2px;
             cursor: pointer;
             transition: var(--transition);
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 10px;
-            margin-top: 40px;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            margin-top: 32px;
+            box-shadow: 0 12px 28px rgba(37, 211, 102, 0.34);
+        }
+
+        .btn-whatsapp::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.28), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .btn-whatsapp:hover::before {
+            transform: translateX(100%);
         }
 
         .btn-whatsapp:hover {
-            background-color: #1ebe57;
+            background: linear-gradient(135deg, var(--whatsapp-hover), #10aa4d);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 16px 34px rgba(37, 211, 102, 0.40);
+        }
+
+        .btn-whatsapp:active {
+            transform: scale(0.98);
+        }
+
+        .btn-whatsapp-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.18);
+            font-size: 1.1rem;
         }
 
         @media (max-width: 768px) {
-            header { padding: 40px 15px; border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
-            header h1 { font-size: 2rem; }
-            .cotizador-card { padding: 25px; }
-            .row { flex-direction: column; gap: 0; }
+            header {
+                padding: 34px 16px 88px;
+                border-bottom-left-radius: 30px;
+                border-bottom-right-radius: 30px;
+            }
+
+            .my-real-logo {
+                width: 96px;
+                height: 96px;
+                border-radius: 24px;
+                margin-bottom: 15px;
+            }
+
+            header p {
+                font-size: 0.92rem;
+                max-width: 315px;
+                padding: 9px 13px;
+            }
+
+            main {
+                margin-top: -52px;
+                padding: 0 12px 28px;
+            }
+
+            .cotizador-card {
+                padding: 22px 16px 18px;
+                border-radius: 26px;
+            }
+
+            .row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .form-group {
+                margin-bottom: 16px;
+            }
+
+            select,
+            input[type="date"],
+            input[type="number"] {
+                min-height: 58px;
+                font-size: 16px;
+                border-radius: 17px;
+            }
+
+            .section-title {
+                margin-bottom: 18px;
+            }
+
+            .habitacion-card {
+                padding: 18px 14px;
+                border-radius: 22px;
+            }
+
+            .edades-container {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-whatsapp {
+                position: sticky;
+                bottom: 12px;
+                z-index: 20;
+                margin-top: 26px;
+                border-radius: 18px;
+                box-shadow: 0 14px 34px rgba(37, 211, 102, 0.42);
+            }
+        }
+
+        @media (max-width: 420px) {
+            header h1 {
+                font-size: 2.05rem;
+            }
+
+            .cotizador-card {
+                padding-left: 14px;
+                padding-right: 14px;
+            }
+
+            .btn-whatsapp {
+                font-size: 0.98rem;
+                padding-left: 14px;
+                padding-right: 14px;
+            }
         }
     </style>
 </head>
@@ -280,7 +532,7 @@
         <div class="container logo-container">
             <!-- REEMPLAZA ESTA IMAGEN CON TU LOGO REAL -->
              <img src="img/logo.png" alt="Logo Agencia" class="my-real-logo"> 
-             
+
             <h1>Arual Experiences</h1>
             <p>Cotiza el viaje de tus sueños en segundos</p>
         </div>
@@ -289,15 +541,15 @@
     <main>
         <div class="cotizador-card">
             <h2 class="section-title">Configura tu Viaje</h2>
-            
+
             <form id="form_cotizador">
-                
+
                 <div class="form-group">
                     <label for="origen">Selecciona tu Origen</label>
                     <select id="origen" required>
                         <option value="" disabled selected>Escoge una ciudad</option>
                         <option value="LEON">Leon</option>
-                     
+
                     </select>
                 </div>
 
@@ -367,10 +619,10 @@
             const transporte = document.getElementById('transporte').value;
             const destinoSelect = document.getElementById('destino');
             const grupoPaquete = document.getElementById('grupo_paquete');
-            
+
             const fechaInput = document.getElementById('fecha');
             const ayudaFecha = document.getElementById('ayuda_fecha');
-            
+
             const fechaSalidaInput = document.getElementById('fecha_salida');
             const ayudaFechaSalida = document.getElementById('ayuda_fecha_salida');
 
@@ -385,10 +637,10 @@
             if (transporte === 'avion') {
                 opciones.push("Cancún (Solo Avión)");
                 grupoPaquete.classList.add('hidden'); 
-                
+
                 ayudaFecha.innerHTML = "Llegada libre.";
                 ayudaFecha.classList.remove('warning-text');
-                
+
                 // Configurar Fecha Salida para Avión
                 fechaSalidaInput.readOnly = false;
                 fechaSalidaInput.style.cursor = 'text';
@@ -397,9 +649,9 @@
 
             } else if (transporte === 'autobus') {
                 grupoPaquete.classList.remove('hidden'); 
-                
+
                 ayudaFecha.innerHTML = "🚌 Solo: <span class='warning-text'>Lunes, Jueves o Domingo</span>.";
-                
+
                 // Configurar Fecha Salida para Autobús
                 fechaSalidaInput.readOnly = true; 
                 fechaSalidaInput.style.cursor = 'not-allowed';
@@ -419,14 +671,14 @@
         function validarFechaYCalcular() {
             const transporte = document.getElementById('transporte').value;
             const fechaInput = document.getElementById('fecha');
-            
+
             if (!fechaInput.value) return;
 
             if (transporte === 'autobus') {
                 const dateParts = fechaInput.value.split('-');
                 const fechaSeleccionada = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
                 const diaSemana = fechaSeleccionada.getDay();
-                
+
                 // 0=Domingo, 1=Lunes, 4=Jueves
                 if (diaSemana !== 0 && diaSemana !== 1 && diaSemana !== 4) {
                     alert("Lo sentimos 🚌. Para viajes en autobús, las llegadas solo están disponibles Lunes, Jueves o Domingo. Por favor selecciona otro día.");
@@ -434,7 +686,7 @@
                     document.getElementById('fecha_salida').value = '';
                     return;
                 }
-                
+
                 // Si la fecha es válida, calcular la salida
                 calcularFechaSalida();
             }
@@ -449,13 +701,13 @@
 
             if (transporte === 'autobus' && fechaLlegada) {
                 const paqueteDias = parseInt(document.getElementById('paquete').value);
-                
+
                 // Lógica de hotel: Un paquete de 3 días significa Llegada día 1, Salida día 3 (Llegada + 2 días)
                 const diasASumar = paqueteDias - 1;
 
                 const dateParts = fechaLlegada.split('-');
                 const fecha = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
-                
+
                 // Sumar los días
                 fecha.setDate(fecha.getDate() + diasASumar);
 
@@ -474,7 +726,7 @@
         function generarFormulariosHabitaciones() {
             const numHab = document.getElementById('num_habitaciones').value;
             const container = document.getElementById('habitaciones_container');
-            
+
             const valoresGuardados = [];
             const cardsActuales = container.querySelectorAll('.habitacion-card');
             cardsActuales.forEach(card => {
@@ -518,7 +770,7 @@
                     </div>
                 `;
                 container.insertAdjacentHTML('beforeend', cardHTML);
-                
+
                 if(valMenores > 0) {
                     generarCamposEdades(i, valoresGuardados[i] ? valoresGuardados[i].edades : []);
                 }
@@ -528,7 +780,7 @@
         function generarCamposEdades(habId, edadesPrevia = []) {
             const numMenores = document.getElementById(`menores_${habId}`).value;
             const containerEdades = document.getElementById(`edades_menores_container_${habId}`);
-            
+
             containerEdades.innerHTML = ''; 
 
             if (numMenores > 0) {
@@ -551,17 +803,17 @@
         // --- ENVIAR A WHATSAPP ---
         document.getElementById('form_cotizador').addEventListener('submit', function(e) {
             e.preventDefault(); 
-            
+
             const origen = document.getElementById('origen').value;
             const transporte = document.getElementById('transporte').value;
             const stringTransporte = transporte === 'autobus' ? '🚌 Autobús' : '✈️ Avión';
             const destino = document.getElementById('destino').value;
-            
+
             const fLlegada = document.getElementById('fecha').value.split('-');
             const fSalida = document.getElementById('fecha_salida').value.split('-');
             const fechaLlegadaFormateada = `${fLlegada[2]}/${fLlegada[1]}/${fLlegada[0]}`;
             const fechaSalidaFormateada = `${fSalida[2]}/${fSalida[1]}/${fSalida[0]}`;
-            
+
             const numHab = document.getElementById('num_habitaciones').value;
 
             let mensaje = `*SOLICITUD DE COTIZACIÓN*%0A`;
@@ -569,12 +821,12 @@
             mensaje += `📍 *Origen:* ${origen}%0A`;
             mensaje += `🚙 *Transporte:* ${stringTransporte}%0A`;
             mensaje += `🏖️ *Destino:* ${destino}%0A`;
-            
+
             if (transporte === 'autobus') {
                 const paquete = document.getElementById('paquete').value;
                 mensaje += `📦 *Paquete:* ${paquete} Días%0A`;
             }
-            
+
             mensaje += `📥 *Llegada:* ${fechaLlegadaFormateada}%0A`;
             mensaje += `🛫 *Regreso:* ${fechaSalidaFormateada}%0A`;
 
@@ -584,9 +836,9 @@
             for (let i = 1; i <= numHab; i++) {
                 const adultos = document.getElementById(`adultos_${i}`).value;
                 const menores = document.getElementById(`menores_${i}`).value;
-                
+
                 mensaje += `%0A*Habitación ${i}:* ${adultos} Adultos`;
-                
+
                 if (menores > 0) {
                     mensaje += `, ${menores} Menores`;
                     let edadesArray = [];
@@ -597,7 +849,7 @@
                     mensaje += ` (Edades: ${edadesArray.join(', ')})`;
                 }
             }
-            
+
             mensaje += `%0A-----------------------------%0A`;
             mensaje += `_Enviado desde el cotizador web._`;
 
